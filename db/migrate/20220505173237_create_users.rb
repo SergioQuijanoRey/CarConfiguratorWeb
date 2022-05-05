@@ -1,3 +1,5 @@
+
+# Migracion para crear la base de datos donde almacenamos los usuarios del sistema
 class CreateUsers < ActiveRecord::Migration[7.0]
   def change
     create_table :users do |t|
