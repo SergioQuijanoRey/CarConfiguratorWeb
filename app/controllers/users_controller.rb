@@ -1,3 +1,6 @@
+
+# Controlador para las peticiones REST sobre los usuarios
+# De momento, solo tiene codigo generado automaticamente
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 

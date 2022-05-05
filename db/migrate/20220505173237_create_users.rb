@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.integer :password
       t.string :role
 
+      # Por defecto ruby on rails añade un timestamp
       t.timestamps
     end
   end
