@@ -7,4 +7,7 @@ class User < ApplicationRecord
   validates_presence_of :password
   validates_presence_of :role
 
+  # Solo admitimos una serie de roles fijos
+  validates :role, inclusion: {in: %w[user admin]}
+
 end
