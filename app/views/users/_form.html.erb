@@ -28,11 +28,7 @@
 
   <div>
     <%= form.label :role, style: "display: block" %>
-    <p>Posibles valores: user, admin</p>
-    <%= form.text_field :role %>
-
-    <%# TODO -- Esto es para tener un select, pero no consigo que funcione %>
-    <%# <%= select_tag(:role, options_for_select([["Usuario Normal", "user"], ["Administrador", "admin"]])) %>
+    <%= form.select :role, ["user", "admin"] %>
   </div>
 
   <div>
