@@ -1,3 +1,24 @@
-# Car Configurator - Proyecto Web
+# README
 
-- Repositorio donde alojamos tanto la página web como la API Rest que se consume en la [aplicación móvil](https://github.com/fervalnav/CarConfigurator)
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
