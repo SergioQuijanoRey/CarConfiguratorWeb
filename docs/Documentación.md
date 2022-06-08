@@ -101,6 +101,7 @@ A partir de los requisitos funcionales de la práctica pasada, desarrollamos est
 
 ## Partes interesadas y sus preocupaciones
 
+\newpage
 ## Diagrama que muestra la arquitectura
 
 ### Diagramas de vistas
@@ -113,11 +114,10 @@ Como hacíamos en la práctica anterior, mostramos los diagramas de las vistas d
 
 ![Vista de selección de una componente](images/flutter/conf_componente_view.drawio.png)
 
+\newpage
 ### Diagramas de clases y de *Widgets*
 
 Empezamos con el diagrama de clases:
-
-<!-- TODO -- hay que cambiar esta imagen porque esta desactualizada -->
 
 ![Diagrama de clases de la aplicación](images/flutter/ds-diagramaclases.png)
 
@@ -127,15 +127,143 @@ Ahora mostramos el diagrama de *Widgets*:
 
 ![Diagrama de Widgets de la aplicación](images/flutter/ds-diagramaclases1.png)
 
+\newpage
+
 ## Criterios de calidad a partir de los requisitos no funcionales
 
-\begin{itemize}
-    \item \textbf{RNF 1. Seguro:} deben mantenerse protegidos los datos de los usuarios.
-    \item \textbf{RNF 2. Evolutivo:} permitiendo añadir/eliminar/modificar partes configurables, opciones para una parte, métodos de pago, etc.
-    \item \textbf{RNF 3. GUI amigable:} fácil de usar, intuitiva, destinada a un usuario medio.
-\end{itemize}
+Los criterios de calidad, que vamos a expresar en términos de requisitos funcionales, son:
 
+1. Deben mantenerse protegidos los datos de los usuarios.
+2. Configurable
+    - Permitir añadir/eliminar/modificar partes configurables, opciones para una parte, métodos de pago guardados, etc.
+3. Facilidad de uso
+    - Buscamos que la aplicación sea fácil de navegar, intuitiva, destinada a un usuario sin conocimiento experto
+4. Accesibiliad
+    - El diseño de la *app* está pensada para que sea fácil de visualizar, con buenos contrastes
+    - Con fuentes sencillas de visualizar y de buen tamaño
+    - Pensando en facilitar el uso a personas con ciertos problemas visuales
+5. Cumplimiento con las normativas legales vigentes
+    - Por ejemplo, con algunas de las más importantes, como la *Normativa Europea de ley de Protección de Datos*
+    - Por el alcance de nuestra aplicación, y por no estar pensada en lanzarase al mercado, no seguimos procedimientos usuales para garantizar estos requisitos (como podría ser el caso de auditorías externas para poder guardar datos de pago, uso de pasarelas de pago externas, ...)
+
+La mayoría de estos requisitos no pueden ser comprobados automáticamente, y por ello debemos verificarlos manualmente antes de lanzar una nueva versión de la aplicación. Por ejemplo, usando la *app* para comprobar algunos de los requisitos, realizando comprobraciones de seguridad en bases de datos...
+
+\newpage
 ## Diseño de las pruebas
+
+### Pruebas unitarias
+
+Notar que en todos los tests o bien tenemos una función tipo `warmup` que inicializa ciertos datos con los que vamos a jugar, o bien definimos una lista con los datos que vamos a manipular y realizar comprobaciones.
+
+1. Tests sobre la configuración activa actual
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Tomar la configuración activa |
+| Datos requeridos | Ninguno, la configuración activa se toma sin parámetros |
+| Condiciones a cumplir | Se toma una configuración activa sin problemas, y el nombre es el nombre por defecto|
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Hacemos `set` del modelo, en la configuración activa |
+| Datos requeridos | La configuración activa, nuevos datos para el modelo |
+| Condiciones a cumplir | El modelo de la configuración activa tiene los datos que hemos pasado |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Hacemos `set` del color, en la configuración activa |
+| Datos requeridos | La configuración activa, nuevos datos para el color |
+| Condiciones a cumplir | El color de la configuración activa tiene los datos que hemos pasado |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Hacemos `set` del tapicería, en la configuración activa |
+| Datos requeridos | La configuración activa, nuevos datos para el tapicería |
+| Condiciones a cumplir | El tapicería de la configuración activa tiene los datos que hemos pasado |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Añadimos un extra en la configuración activa |
+| Datos requeridos | El extra que queremos añadir |
+| Condiciones a cumplir | El extra se debe añadir a la configuración que tenemos activa |
+
+
+| | |
+| --- | --- |
+| Descripción de la prueba | El cálculo del precio debe ser correcto |
+| Datos requeridos | Se toma la configuración activa, y a mitad del test se cambia el modelo |
+| Condiciones a cumplir | El precio por defecto debe ser el correcto. Cuando cambiamos de modelo, el nuevo precio debe ser correcto |
+
+2. Tests del repositorio de configuraciones de un coche
+    - Disponemos de la función `create_basic_repo` como `warmup`
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Los valores se almacenan correctamente |
+| Datos requeridos | Repositorio creado por `create_basic_repo` |
+| Condiciones a cumplir | Debe tener los elementos correctos |
+
+
+| | |
+| --- | --- |
+| Descripción de la prueba | La funcionalidad de añadir funciona como se espera |
+| Datos requeridos | Datos para añadir a la configuración |
+| Condiciones a cumplir | Se debe almacenar bien la nueva configuración. Si la intentamos volver a añadir, como ya está almacenada, no debe almacenarse de nuevo |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | La funcionalidad de buscar configuraciones funciona como se espera |
+| Datos requeridos | Identificador de la configuración que se busca |
+| Condiciones a cumplir | Si el identificador es bueno, se debe encontrar bien la configuración. Si la configuración no es buena, se debe retornar un `null` |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | La funcionalidad de eliminar configuraciones funciona como se espera |
+| Datos requeridos | Identificador de la configuración a eliminar |
+| Condiciones a cumplir | La configuración se elimina con éxito |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Borrar dos veces la misma configuracion solo borra en la primera vez|
+| Datos requeridos | Identificador de la configuración que se borra dos veces |
+| Condiciones a cumplir | La primera vez, se borra con éxito. La segunda vez, al no encontrarse en el sistema, no se realiza ningún cambio en la persistencia de datos |
+
+3. Test de la clase que usamos para modelar las opciones
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Crear una función actúa como debería |
+| Datos requeridos | Datos de la opción que se crea|
+| Condiciones a cumplir | Se crea una opción con los datos correctos|
+
+| | |
+| --- | --- |
+| Descripción de la prueba | El precio de una opción es el esperado |
+| Datos requeridos | Datos de la opción creada |
+| Condiciones a cumplir | El precio debe coincidir con el esperado |
+
+### Tests de widgets
+
+| | |
+| --- | --- |
+| Descripción de la prueba | El botón de eliminar debe eliminar la configuración correcta |
+| Datos requeridos | Identificador de la configuración que queremos eliminar |
+| Condiciones a cumplir | Tras simular las acciones necesarias, esa configuración ya no se encuentra |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | El botón de configurar debe cambiar a la vista correcta |
+| Datos requeridos | Identificador de la configuración que queremos modificar |
+| Condiciones a cumplir | Se debe pasar a la vista de configuración, con los datos asociados a esa configuración |
+
+### Tests de integración
+
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Se realiza una configuración desde cero correctamente |
+| Datos requeridos | La secuencia de acciones que se realiza|
+| Condiciones a cumplir | Se pulsa el botón de configurar de cero. Se guardan los datos. Se vuelve a la vista principal donde se encuentra la configuración, con datos por defecto, guardada en el sistema. |
 
 \newpage
 
