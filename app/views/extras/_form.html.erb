@@ -1,0 +1,41 @@
+<%= form_with(model: extra) do |form| %>
+  <% if extra.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(extra.errors.count, "error") %> prohibited this extra from being saved:</h2>
+
+      <ul>
+        <% extra.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <form class="form-inline">
+    <div class="form-group">
+      <%= form.label :nombre, style: "display: block" %>
+      <%= form.text_field :nombre, class: "form-control"%>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :precio, style: "display: block" %>
+      <%= form.text_field :precio, class: "form-control" %>
+    </div>
+  </form>
+  
+  <br>
+  
+  <div>
+    <% if @extra.image.attached? %>
+      <%= image_tag @extra.image, style: "width: 200px; display: block" %>
+    <% end %>
+    <%= form.label :image, style: "width: 200px; display: block" %>
+    <%= form.file_field :image %>
+  </div>
+  
+  <br>
+  
+  <div>
+    <%= form.submit class: "btn btn-primary"%>
+  </div>
+<% end %>

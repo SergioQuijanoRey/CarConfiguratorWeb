@@ -1,0 +1,41 @@
+<%= form_with(model: color) do |form| %>
+  <% if color.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(color.errors.count, "error") %> prohibited this color from being saved:</h2>
+
+      <ul>
+        <% color.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <form class="form-inline">
+    <div class="form-group" style="color: white">
+      <%= form.label :nombre, style: "display: block" %>
+      <%= form.text_field :nombre, class: "form-control" %>
+    </div>
+
+    <div class="form-group" style="color: white">
+      <%= form.label :precio, style: "display: block" %>
+      <%= form.text_field :precio, class: "form-control" %>
+    </div>
+  </form>
+
+  <br>
+
+  <div>
+    <% if @color.image.attached? %>
+      <%= image_tag @color.image, style: "width: 200px; display: block" %>
+    <% end %>
+    <%= form.label :image, style: "width: 200px; display: block" %>
+    <%= form.file_field :image %>
+  </div>
+  
+  <br>
+  
+  <div>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

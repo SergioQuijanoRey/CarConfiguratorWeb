@@ -1,0 +1,23 @@
+<h1>Tapicería</h1>
+
+<p style="color: green"><%= notice %></p>
+
+<div id="tapiceria">
+  <% @tapiceria.each do |tapicerium| %>
+    <%= render tapicerium %>
+    <p>
+      <%= link_to "Show this tapicerium", tapicerium, class: "btn btn-primary" %>
+    </p>
+    <br>
+  <% end %>
+</div>
+
+<br>
+
+<%= link_to "New tapicerium", new_tapicerium_path,  class: "btn btn-info" %>
+
+<br><br>
+
+<div>
+  <%= link_to "Back to modelos", modelos_path, class: "btn btn-info" %>
+</div>

@@ -1,0 +1,16 @@
+<h1>Modelos</h1>
+
+<div id="modelos">
+  <% @modelos.each do |modelo| %>
+    <%= render modelo %>
+    <p>
+      <%= link_to "Show this modelo", modelo, class: "btn btn-primary" %>
+    </p>
+    <br>
+  <% end %>
+</div>
+
+<br>
+
+<div><%= link_to "Nuevo modelo", new_modelo_path ,class: "btn btn-info" %></div>
+

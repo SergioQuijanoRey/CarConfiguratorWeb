@@ -1,0 +1,24 @@
+<h1>Extras</h1>
+
+<p style="color: green"><%= notice %></p>
+
+
+<div id="extras">
+  <% @extras.each do |extra| %>
+    <%= render extra %>
+    <p>
+      <%= link_to "Show this extra", extra, class: "btn btn-primary" %>
+    </p>
+    <br>
+  <% end %>
+</div>
+
+<br>
+
+<%= link_to "New extra", new_extra_path, class: "btn btn-info" %>
+
+<br><br>
+
+<div>
+  <%= link_to "Back to modelos", modelos_path, class: "btn btn-info" %>
+</div>

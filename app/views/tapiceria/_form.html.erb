@@ -1,0 +1,41 @@
+<%= form_with(model: tapicerium) do |form| %>
+  <% if tapicerium.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(tapicerium.errors.count, "error") %> prohibited this tapicerium from being saved:</h2>
+
+      <ul>
+        <% tapicerium.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <form class="form-inline">
+    <div class="form-group">
+      <%= form.label :nombre, style: "display: block" %>
+      <%= form.text_field :nombre, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.label :precio, style: "display: block" %>
+      <%= form.text_field :precio, class: "form-control" %>
+    </div>
+  </form>
+  
+  <br>
+  
+  <div>
+    <% if @tapicerium.image.attached? %>
+      <%= image_tag @tapicerium.image, style: "width: 200px; display: block" %>
+    <% end %>
+    <%= form.label :image, style: "width: 200px; display: block" %>
+    <%= form.file_field :image %>
+  </div>
+  
+  <br>
+  
+  <div>
+    <%= form.submit class: "btn btn-primary"%>
+  </div>
+<% end %>

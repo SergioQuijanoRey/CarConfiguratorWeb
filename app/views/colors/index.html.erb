@@ -1,0 +1,23 @@
+<h1>Colores</h1>
+
+<p style="color: green"><%= notice %></p>
+
+<div id="colors">
+  <% @colors.each do |color| %>
+    <%= render color %>
+    <p>
+      <%= link_to "Show this color", color,  class: "btn btn-primary" %>
+    </p>
+    <br>
+  <% end %>
+</div>
+
+<br>
+
+<%= link_to "New color", new_color_path,  class: "btn btn-info" %>
+
+<br><br>
+
+<div>
+  <%= link_to "Back to modelos", modelos_path, class: "btn btn-info" %>
+</div>
