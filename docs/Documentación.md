@@ -101,13 +101,41 @@ A partir de los requisitos funcionales de la práctica pasada, desarrollamos est
 
 ## Partes interesadas y sus preocupaciones
 
+Las partes interesadas que identificamos son:
+
+1. Arquitecto: (máster en ingeniería informática) es el director gerente de una pequeña empresa especializada en el desarrollo de aplicaciones web y móviles. Será el arquitecto encargado de elaborar la descripción arquitectónica y supervisar el proceso de desarrollo
+    - En este caso, nosotros cuatro seremos los arquitectos de la aplicación
+2. Cliente: Dueño de la empresa de coches que contrata nuestros servicios para el desarrollo de las aplicaciones.
+3. Desarrolladores: equipo de desarrolladores (nostros cuatro) que se encargan del desarrollo de las aplicación web y móvil. Se comunican entre ellos pues hay una parte en común de desarrollo para las dos aplicaciones a desarrollar
+4. Técnico de pruebas: realiza las pruebas de los sistemas software desarrollados.
+    - En este caos, también seremos nosotros los técniso de pruebas
+5. Usuarios: existirán tres tipos de usuarios
+    - Clientes de la app móvil
+    - Gestor de catálogo y ventas: usará la app web para introducir nuevos modelos. Aunque pertenezca más al otro sistema, dejamos esto aquí por claridad
+
+La empresa de venta de coches tiene que mantener una gran reputación asociada a su marca.
+Por tanto, los siguientes objetivos son importantes:
+
+- Los valores de la empresa deben reflejarse en las aplicaciones desarrolladas
+- Las aplicaciones deben presentar una cara “humana” al cliente
+- Las aplicaciones deben ser sencillas de usar, accesible para todas las personas
+- Las aplicaciones deben ser rápidas y responsivas
+
+Los usuarios expresan las siguientes inquietudes:
+
+- Temo que tenga problemas de accesibilidad (paleta de colores no adecuada para la vista, letras muy pequeñas, botones pequeños…)
+- Quiero que el sistema gestione distintos tipos de usuario y que analice los datos del usuario para facilitar la navegación / compra a través del sistema
+- Temo que la selección de las distintas variantes de las componentes de una configuración sea compleja y poco usable
+
+Todo esto tendrá un impacto directo en los requisitos funcionales y no funcionales del sistema
+
 \newpage
+
 ## Diagrama que muestra la arquitectura
 
 ### Diagramas de vistas
 
 Como hacíamos en la práctica anterior, mostramos los diagramas de las vistas de la aplicación, para que sea más fácil comprender el funcionamiento de esta:
-
 ![Vista principal de la aplicación. Desde esta vista navegamos al resto de partes de la aplicación](images/flutter/main_view.drawio.png)
 
 ![Vista de selección de configuración](images/flutter/conf_view.drawio.png)
@@ -115,6 +143,7 @@ Como hacíamos en la práctica anterior, mostramos los diagramas de las vistas d
 ![Vista de selección de una componente](images/flutter/conf_componente_view.drawio.png)
 
 \newpage
+
 ### Diagramas de clases y de *Widgets*
 
 Empezamos con el diagrama de clases:
@@ -149,6 +178,7 @@ Los criterios de calidad, que vamos a expresar en términos de requisitos funcio
 La mayoría de estos requisitos no pueden ser comprobados automáticamente, y por ello debemos verificarlos manualmente antes de lanzar una nueva versión de la aplicación. Por ejemplo, usando la *app* para comprobar algunos de los requisitos, realizando comprobraciones de seguridad en bases de datos...
 
 \newpage
+
 ## Diseño de las pruebas
 
 ### Pruebas unitarias
@@ -293,6 +323,34 @@ Notar que en todos los tests o bien tenemos una función tipo `warmup` que inici
 
 
 ## Partes interesadas y sus preocupaciones
+
+Las partes interesadas que identificamos son:
+
+1. Arquitecto: (máster en ingeniería informática) es el director gerente de una pequeña empresa especializada en el desarrollo de aplicaciones web y móviles. Será el arquitecto encargado de elaborar la descripción arquitectónica y supervisar el proceso de desarrollo
+    - En este caso, nosotros cuatro seremos los arquitectos de la aplicación
+2. Cliente: Dueño de la empresa de coches que contrata nuestros servicios para el desarrollo de las aplicaciones.
+3. Desarrolladores: equipo de desarrolladores (nostros cuatro) que se encargan del desarrollo de las aplicación web y móvil. Se comunican entre ellos pues hay una parte en común de desarrollo para las dos aplicaciones a desarrollar
+4. Técnico de pruebas: realiza las pruebas de los sistemas software desarrollados.
+    - En este caos, también seremos nosotros los técniso de pruebas
+5. Usuarios: existirán tres tipos de usuarios
+    - Clientes de la app móvil
+    - Gestor de catálogo y ventas: usará la app web para introducir nuevos modelos. Aunque pertenezca más al otro sistema, dejamos esto aquí por claridad
+
+La empresa de venta de coches tiene que mantener una gran reputación asociada a su marca.
+Por tanto, los siguientes objetivos son importantes:
+
+- Los valores de la empresa deben reflejarse en las aplicaciones desarrolladas
+- Las aplicaciones deben presentar una cara “humana” al cliente
+- Las aplicaciones deben ser sencillas de usar, accesible para todas las personas
+- Las aplicaciones deben ser rápidas y responsivas
+
+Los usuarios expresan las siguientes inquietudes:
+
+- Temo que tenga problemas de accesibilidad (paleta de colores no adecuada para la vista, letras muy pequeñas, botones pequeños…)
+- Quiero que el sistema gestione distintos tipos de usuario y que analice los datos del usuario para facilitar la navegación / compra a través del sistema
+- Temo que la selección de las distintas variantes de las componentes de una configuración sea compleja y poco usable
+
+Todo esto tendrá un impacto directo en los requisitos funcionales y no funcionales del sistema
 
 ## Diagrama que muestra la arquitectura
 
