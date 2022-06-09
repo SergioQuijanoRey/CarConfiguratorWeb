@@ -6,7 +6,7 @@
   <% @modelos.each do |modelo| %>
     <%= render modelo %>
     <p>
-      <%= link_to "Show this modelo", modelo, class: "btn btn-primary" %>
+      <%= link_to "Show this modelo", modelo %>
     </p>
     <br>
   <% end %>
@@ -14,5 +14,5 @@
 
 <br>
 
-<div><%= link_to "Nuevo modelo", new_modelo_path ,class: "btn btn-info" %></div>
+<div><%= link_to "Nuevo modelo", new_modelo_path %></div>
 

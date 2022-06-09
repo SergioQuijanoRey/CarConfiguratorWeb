@@ -7,7 +7,7 @@
   <% @extras.each do |extra| %>
     <%= render extra %>
     <p>
-      <%= link_to "Show this extra", extra, class: "btn btn-primary" %>
+      <%= link_to "Show this extra", extra %>
     </p>
     <br>
   <% end %>
@@ -15,10 +15,4 @@
 
 <br>
 
-<%= link_to "New extra", new_extra_path, class: "btn btn-info" %>
-
-<br><br>
-
-<div>
-  <%= link_to "Back to modelos", modelos_path, class: "btn btn-info" %>
-</div>
+<%= link_to "New extra", new_extra_path %>

@@ -6,7 +6,7 @@
   <% @colors.each do |color| %>
     <%= render color %>
     <p>
-      <%= link_to "Show this color", color,  class: "btn btn-primary" %>
+      <%= link_to "Show this color", color %>
     </p>
     <br>
   <% end %>
@@ -14,10 +14,8 @@
 
 <br>
 
-<%= link_to "New color", new_color_path,  class: "btn btn-info" %>
-
-<br><br>
+<%= link_to "New color", new_color_path %>
 
 <div>
-  <%= link_to "Back to modelos", modelos_path, class: "btn btn-info" %>
+  <%= link_to "Back to modelos", modelos_path %>
 </div>

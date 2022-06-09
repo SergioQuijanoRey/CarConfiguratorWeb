@@ -9,8 +9,8 @@
 <% end %>
 
 <div>
-  <%= link_to "Edit this tapicerium", edit_tapicerium_path(@tapicerium), class: "btn btn-primary" %> |
-  <%= link_to "Back to tapiceria", tapiceria_path, class: "btn btn-primary" %>
-  <br><br>
-  <%= button_to "Destroy this tapicerium", @tapicerium, method: :delete, class: "btn btn-danger" %>
+  <%= link_to "Edit this tapicerium", edit_tapicerium_path(@tapicerium) %> |
+  <%= link_to "Back to tapiceria", tapiceria_path %>
+
+  <%= button_to "Destroy this tapicerium", @tapicerium, method: :delete %>
 </div>

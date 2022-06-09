@@ -6,7 +6,7 @@
   <% @tapiceria.each do |tapicerium| %>
     <%= render tapicerium %>
     <p>
-      <%= link_to "Show this tapicerium", tapicerium, class: "btn btn-primary" %>
+      <%= link_to "Show this tapicerium", tapicerium %>
     </p>
     <br>
   <% end %>
@@ -14,10 +14,4 @@
 
 <br>
 
-<%= link_to "New tapicerium", new_tapicerium_path,  class: "btn btn-info" %>
-
-<br><br>
-
-<div>
-  <%= link_to "Back to modelos", modelos_path, class: "btn btn-info" %>
-</div>
+<%= link_to "New tapicerium", new_tapicerium_path %>

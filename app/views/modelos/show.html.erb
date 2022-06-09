@@ -9,8 +9,8 @@
 <% end %>
 
 <div>
-  <%= link_to "Edit this modelo", edit_modelo_path(@modelo), class: "btn btn-primary" %> |
-  <%= link_to "Back to modelos", modelos_path, class: "btn btn-primary" %>
+  <%= link_to "Edit this modelo", edit_modelo_path(@modelo) %> |
+  <%= link_to "Back to modelos", modelos_path %>
   <br><br>
-  <%= button_to "Destroy this modelo", @modelo, method: :delete, class: "btn btn-danger" %>
+  <%= button_to "Destroy this modelo", @modelo, method: :delete %>
 </div>
