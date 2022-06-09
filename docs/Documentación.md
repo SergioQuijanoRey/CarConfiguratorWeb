@@ -301,26 +301,44 @@ Notar que en todos los tests o bien tenemos una función tipo `warmup` que inici
 
 ## Notas iniciales
 
-## Requisitos funcionales
-    \item \textbf{RF 3. Gestión del catálogo:} este requisito queda pospuesto para futuras versiones, ya que sería necesario interactuar con una BD. Además, iría más destinado a un usuario con privilegios de administrador.
-    \begin{itemize}
-        \item \textbf{RF 3.1.} Añadir nueva parte configurable.
-        \item \textbf{RF 3.2.} Eliminar parte configurable.
-        \item \textbf{RF 3.3.} Modificar parte configurable (nombre, descripción, etc.).
-        \item \textbf{RF 3.4.} Añadir nueva opción de una parte configurable.
-        \item \textbf{RF 3.5.} Eliminar una opción de una parte configurable.
-        \item \textbf{RF 3.6.} Modificar una opción de una parte configurable (nombre, descripción, fotos, etc.).
-    \end{itemize}
+Esta aplicación, como ya hemos comentado, ha sido desarrollada usando el comando `rails generate scaffold` intensivamente. Por tanto, solo hemos tenido que codificar manualmente ciertas partes de la aplicación, aquellas en las que queríamos introducir un comportamiento específico que *Ruby on Rails* no nos daba (por ejemplo, estilos personales desarrollados con `css`).
 
+Por tanto, la estructura de la aplicación será la usual en una aplicación sencilla de *Ruby on Rails*. Y por este motivo, intentaremos que los diagramas que representan la arquitectura sean sencillos, señalando las particularidades de nuestro sistema cuando sea necesario.
+
+## Requisitos funcionales
+
+Como ya hemos comentado, la aplicación se encargará de manejar las componentes que están disponibles en el catálogo del comprador, y por tanto, todos nuestros requisitos funcionales irán encaminados a cubrir las necesidades derivadas de esto.
+
+Para evitar ser muy repetitivos, hablaremos de componentes configurables para referirnos a las distintas opciones para el modelo, tapicería, color y extras. Podríamos copiar los mismos requisitos funcionales tres veces, pero esto no aporta nada, porque todas las componentes (modelo, tapicería, color y extras) tendrán el mismo comportamiento.
+
+|           |      |
+| ---       | ---  |
+| Nombre \| Id. RF | 1.1 Añadir nuevo componente configurable |
+| Entrada      | Datos del nuevo componente configurable |
+| Procesamiento | Almacenar en la base de datos los datos de la nueva componente, en la tabla adecuada para el tipo de componente |
+| Salida | Mensaje de error o éxito, según se haya desarrollado la operación |
+
+|           |      |
+| ---       | ---  |
+| Nombre \| Id. RF | 1.2 Eliminar un componente configurable |
+| Entrada      | Identificación del componente que queremos eliminar |
+| Procesamiento | Borrar dicho componente de la base de datos |
+| Salida | Mensaje de error o éxito, según se haya desarrollado la operación |
+
+|           |      |
+| ---       | ---  |
+| Nombre \| Id. RF | 1.3 Modificar los datos de un componente configurable |
+| Entrada      | Identificador del componente a modificar, datos con los que modificamos la configuración. Notar que si solo cambiamos un campo (ie. el nombre) debemos pasar obligatoriamente todos los datos de las partes que forman la componente (ie. nombre, color, precio, ...) |
+| Procesamiento | Se modifican los datos en la base de datos |
+| Salida | Mensaje de error o éxito, según se haya desarrollado la operación. Puede fallar porque el identificador no sea válido o porque los datos que queremos introducir no sean válidos. |
 
 
 |           |      |
 | ---       | ---  |
-| Nombre \| Id. RF | |
-| Entrada      | |
-| Procesamiento | |
-| Salida | |
-
+| Nombre \| Id. RF | 1.4 Modificar los datos de un apartado específico de una componente configurable |
+| Entrada      | Identificador del componente a modificar, datos con los que modificamos parte concreta de la configuración, identificador de la parte concreta que modificamos |
+| Procesamiento | Se modifican los datos en la base de datos |
+| Salida | Mensaje de error o éxito, según se haya desarrollado la operación. Puede fallar porque el identificador de la componente no sea válido, o porque los datos que queremos introducir no sean válidos, o porque la identificación de la parte concreta que modificamos no sea válida. |
 
 ## Partes interesadas y sus preocupaciones
 
