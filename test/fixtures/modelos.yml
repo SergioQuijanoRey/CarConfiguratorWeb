@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  nombre: MyString
-  precio: 1.5
+  nombre: Model A
+  precio: 25000
 
 two:
-  nombre: MyString
-  precio: 1.5
+  nombre: Model X
+  precio: 30000

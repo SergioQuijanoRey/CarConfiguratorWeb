@@ -15,13 +15,13 @@ class TapiceriaControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create tapicerium" do
-    assert_difference("Tapicerium.count") do
-      post tapiceria_url, params: { tapicerium: { nombre: @tapicerium.nombre, precio: @tapicerium.precio } }
-    end
-
-    assert_redirected_to tapicerium_url(Tapicerium.last)
-  end
+  # test "should create tapicerium" do
+  #   assert_difference("Tapicerium.count") do
+  #     post tapiceria_url, params: { tapicerium: { nombre: @tapicerium.nombre, precio: @tapicerium.precio } }
+  #   end
+  #
+  #   assert_redirected_to tapicerium_url(Tapicerium.last)
+  # end
 
   test "should show tapicerium" do
     get tapicerium_url(@tapicerium)

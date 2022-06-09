@@ -15,13 +15,13 @@ class ColorsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create color" do
-    assert_difference("Color.count") do
-      post colors_url, params: { color: { nombre: @color.nombre, precio: @color.precio } }
-    end
-
-    assert_redirected_to color_url(Color.last)
-  end
+  # test "should create color" do
+  #   assert_difference("Color.count") do
+  #     post colors_url, params: { color: { nombre: @color.nombre, precio: @color.precio } }
+  #   end
+  #
+  #   assert_redirected_to color_url(Color.last)
+  # end
 
   test "should show color" do
     get color_url(@color)

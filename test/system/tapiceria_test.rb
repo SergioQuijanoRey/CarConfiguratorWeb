@@ -7,14 +7,14 @@ class TapiceriaTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit tapiceria_url
-    assert_selector "h1", text: "Tapiceria"
+    assert_selector "h1", text: "Tapicería"
   end
 
   test "should create tapicerium" do
     visit tapiceria_url
     click_on "New tapicerium"
 
-    fill_in "Nombre", with: @tapicerium.nombre
+    fill_in "Nombre", with: "newtapiceria"
     fill_in "Precio", with: @tapicerium.precio
     click_on "Create Tapicerium"
 

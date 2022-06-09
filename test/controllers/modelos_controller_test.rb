@@ -15,13 +15,13 @@ class ModelosControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create modelo" do
-    assert_difference("Modelo.count") do
-      post modelos_url, params: { modelo: { nombre: @modelo.nombre, precio: @modelo.precio } }
-    end
-
-    assert_redirected_to modelo_url(Modelo.last)
-  end
+  # test "should create modelo" do
+  #   assert_difference("Modelo.count") do
+  #     post modelos_url, params: { modelo: { nombre: @modelo.nombre, precio: @modelo.precio } }
+  #   end
+  #
+  #   assert_redirected_to modelo_url(Modelo.last)
+  # end
 
   test "should show modelo" do
     get modelo_url(@modelo)

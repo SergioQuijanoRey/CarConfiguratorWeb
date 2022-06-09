@@ -7,14 +7,14 @@ class ColorsTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit colors_url
-    assert_selector "h1", text: "Colors"
+    assert_selector "h1", text: "Colores"
   end
 
   test "should create color" do
     visit colors_url
     click_on "New color"
 
-    fill_in "Nombre", with: @color.nombre
+    fill_in "Nombre", with: "newcolor"
     fill_in "Precio", with: @color.precio
     click_on "Create Color"
 

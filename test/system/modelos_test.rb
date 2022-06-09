@@ -12,9 +12,9 @@ class ModelosTest < ApplicationSystemTestCase
 
   test "should create modelo" do
     visit modelos_url
-    click_on "New modelo"
+    click_on "Nuevo modelo"
 
-    fill_in "Nombre", with: @modelo.nombre
+    fill_in "Nombre", with: "newmodelo"
     fill_in "Precio", with: @modelo.precio
     click_on "Create Modelo"
 

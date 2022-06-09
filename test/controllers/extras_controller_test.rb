@@ -15,13 +15,13 @@ class ExtrasControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create extra" do
-    assert_difference("Extra.count") do
-      post extras_url, params: { extra: { nombre: @extra.nombre, precio: @extra.precio } }
-    end
-
-    assert_redirected_to extra_url(Extra.last)
-  end
+  # test "should create extra" do
+  #   assert_difference("Extra.count") do
+  #     post extras_url, params: { extra: { nombre: @extra.nombre, precio: @extra.precio } }
+  #   end
+  #
+  #   assert_redirected_to extra_url(Extra.last)
+  # end
 
   test "should show extra" do
     get extra_url(@extra)

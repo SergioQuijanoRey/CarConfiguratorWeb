@@ -14,7 +14,7 @@ class ExtrasTest < ApplicationSystemTestCase
     visit extras_url
     click_on "New extra"
 
-    fill_in "Nombre", with: @extra.nombre
+    fill_in "Nombre", with: "newextra"
     fill_in "Precio", with: @extra.precio
     click_on "Create Extra"
 
