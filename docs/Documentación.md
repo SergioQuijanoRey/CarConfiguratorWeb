@@ -378,6 +378,51 @@ Todo esto tendrá un impacto directo en los requisitos funcionales y no funciona
 
 A partir de estos diseños, ha sido fácil generar el código, usando principalmente la instrucción `rails generate scaffold` para escribir la cantidad mínima de código necesaria, siguiendo así un **Desarrollo Dirigido por Modelos** o *MDD* como hemos visto en teoría.
 
+Además, como comentaremos a lo largo de esta documentación, tenemos cuatro componentes (modelo, tapicería, color, extras) que exhiben el mismo comportamiento. Por tanto, teniendo esto en cuenta, y que hemos seguido la estructura típica que impone *Ruby on Rails*, intentaremos describir gráficamente la arquitectura de la forma más clara y compacta posible. Intentaremos también no mostrar las partes de *Ruby on Rails* en las que realmente no estamos interesados, como `helpers`, `jobs`, `mailers`, configuraciones concretas de bases de datos, ...
+
+Empezamos con una vista general, en el que se muestran las entidades más abstractas del sistema, y cómo interactúan entre sí:
+
+![Diagrama en el que mostramos la arquitectura de forma abstracta](images/ror/diagrama_abstracto.png)
+
+Con este diagrama, que presenta un alto nivel de abstracción, lo que queremos mostrar es lo siguiente:
+
+1. Tenemos cuatro entidades en nuestra lógica de negocio: modelo, tapicería, color y extras
+2. Estas cuatro entidades no interactúan entre sí en este sistema, aunque como ya hemos visto, sí que interactúan entre sí en la aplicación móvil, pues forman parte de un todo, la configuración que el usuario pretende comprar
+3. Estas cuatro entidades interactúan (se implementan) en el sistema `Ruby` en cuatro puntos principales:
+    1. El controlador, que se encarga de las peticiones `HTTP` y de exponer una *API REST*
+    2. El modelo, que define el comportamiento de las entidades
+    3. Las vistas, que definen cómo se van a ver las entidades en la *web app* con la que interactúan los *managers* para administrar el catálogo
+    4. Las migraciones, que definen la representación de las entidades en la persistencia de datos
+4. Como estamos usando migraciones y el sistema `Ruby on Rails`, podemos usar dos sistemas de bases de datos sin demasiados problemas. De hecho, así lo hemos hecho. Hemos usado `sqlite` para desarrollar en local, y `mysql` en el servidor `clados.ugr.es`
+
+Fuera de esto, no aplicamos otros patrones de diseño. `Ruby on Rails` tiene unas convenciones muy fuertes que hacen que todos estos patrones estén impuestos desde el inicio, facilitándonos la creación de una aplicación de cierto tamaño de forma estructurada.
+
+Para aclarar todo lo que he dicho, muestro un diagrama de clases en base a lo anterior. De nuevo, solo muestro las clases interesantes, obviando algunas que no hemos usado para nada:
+
+![Diagrama de clases del sistema](images/ror/diagrama_clases.png)
+
+Notar que no hemos escrito los métodos de las clases, como es lo usual. Esto es porque las cuatro componentes exhiben el mismo comportamiento, y es más cómodo listar ahora los métodos de cada grupo:
+
+1. Controladores:
+    - `index`
+    - `show`
+    - `new`
+    - `get`
+    - `create`
+    - `update`
+    - `destroy`
+    - `private set_<componente>`
+    - `private <componente>_params`
+2. Modelos:
+    - No tenemos métodos, estos se generan automáticamente por la herencia
+    - Lo que tenemos es una forma bastante declarativa de definir los datos del modelo y algunas restricciones, por ejemplo:
+    ```ruby
+        validates :nombre, presence: true
+        validates :nombre, uniqueness: true
+    ```
+3. Migraciones
+    - `change` que llama a `create_table`
+
 \newpage
 
 ## Criterios de calidad a partir de los requisitos no funcionales
@@ -490,8 +535,6 @@ En este caso, no hemos tenido todo el autogeneración que sí tuvimos con los *t
 ### Tests de integración
 
 De nuevo, tenemos el mismo comportamiento en los cuatro componentes. Así que los *tests* de integración serán los mismos, pero modificando los datos y tipos que se necesitan en cada caso. Y de nuevo, hablo de *componentes* en general para no repetir 4 veces las mismas tablas.
-
-
 
 | | |
 | --- | --- |
