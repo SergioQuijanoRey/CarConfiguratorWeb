@@ -521,16 +521,19 @@ De nuevo, uso la palabra *componentes* para referirme a modelo, tapicería, colo
 | Datos requeridos | URL que tenemos que visitar |
 | Condiciones a cumplir | Se visita la URL dada, se observa que estamos en la página correspondiente mirando el título (`<h1>`) de esta|
 
+| | |
 | --- | --- |
 | Descripción de la prueba | Podemos crear una nueva instancia|
 | Datos requeridos | Datos con los que rellenamos el formulario |
 | Condiciones a cumplir | Rellenamos los campos de los formularios con los datos adecuados. Clickamos en crear. Se muestra el mensaje de éxito |
 
+| | |
 | --- | --- |
 | Descripción de la prueba | Podemos editar una instancia de componente |
 | Datos requeridos | Datos con los que vamos a editar |
 | Condiciones a cumplir | Se clicka en el botón de editar. Se rellenan los campos del formulario con los nuevos datos. Guardamos y comprobamos que recibimos un mensaje de éxito |
 
+| | |
 | --- | --- |
 | Descripción de la prueba | Podemos borrar una instancia de componente |
 | Datos requeridos | URL de la instancia que queremos borrar |
