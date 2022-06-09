@@ -340,6 +340,8 @@ Para evitar ser muy repetitivos, hablaremos de componentes configurables para re
 | Procesamiento | Se modifican los datos en la base de datos |
 | Salida | Mensaje de error o éxito, según se haya desarrollado la operación. Puede fallar porque el identificador de la componente no sea válido, o porque los datos que queremos introducir no sean válidos, o porque la identificación de la parte concreta que modificamos no sea válida. |
 
+\newpage
+
 ## Partes interesadas y sus preocupaciones
 
 Las partes interesadas que identificamos son:
@@ -370,11 +372,166 @@ Los usuarios expresan las siguientes inquietudes:
 
 Todo esto tendrá un impacto directo en los requisitos funcionales y no funcionales del sistema
 
+\newpage
+
 ## Diagrama que muestra la arquitectura
 
 A partir de estos diseños, ha sido fácil generar el código, usando principalmente la instrucción `rails generate scaffold` para escribir la cantidad mínima de código necesaria, siguiendo así un **Desarrollo Dirigido por Modelos** o *MDD* como hemos visto en teoría.
 
+\newpage
+
 ## Criterios de calidad a partir de los requisitos no funcionales
+
+Los criterios de calidad, que vamos a expresar en términos de requisitos funcionales, son:
+
+1. Deben mantenerse protegidos los datos de los usuarios (en este caso, los datos de los administradores que acceden a la app para manejar el catálogo disponible).
+2. Configurable
+    - Permitir añadir/eliminar/modificar partes configurables, opciones para una parte, métodos de pago guardados, etc.
+3. Facilidad de uso
+    - Buscamos que la aplicación sea fácil de navegar, intuitiva, destinada a un usuario sin conocimiento experto
+4. Accesibilidad
+    - El diseño de la *app* está pensada para que sea fácil de visualizar, con buenos contrastes
+    - Con fuentes sencillas de visualizar y de buen tamaño
+    - Pensando en facilitar el uso a personas con ciertos problemas visuales
+5. Cumplimiento con las normativas legales vigentes
+    - Por ejemplo, con algunas de las más importantes, como la *Normativa Europea de ley de Protección de Datos*
+    - Por el alcance de nuestra aplicación, y por no estar pensada en lanzarse al mercado, no seguimos procedimientos usuales para garantizar estos requisitos (como podría ser el caso de auditorías externas para poder guardar datos de pago, uso de pasarelas de pago externas, ...)
+
+La mayoría de estos requisitos no pueden ser comprobados automáticamente, y por ello debemos verificarlos manualmente antes de lanzar una nueva versión de la aplicación. Por ejemplo, usando la *app* para comprobar algunos de los requisitos, realizando comprobaciones de seguridad en bases de datos...
+
+Notar que estos requisitos son iguales que en la aplicación *Flutter*. Esto es porque son requisitos que podrían (y deberían) aparecer en cualquier proyecto de Desarrollo del Software.
+
+\newpage
 
 ## Diseño de las pruebas
 
+A diferencia de con *Flutter*, al usar la orden `rails generate scaffold`, se generan automáticamente muchas de las pruebas de las que nos podemos aprovechar, pues como se ha visto en el caso de *Flutter*, muchas de estas pruebas son repetitivas (aunque necesarias).
+
+También es muy cómodo tener unas *fixtures* generadas por el desarrollo dirigido a modelos. Aunque hemos tenido que modificar los valores de los atributos para que tengan un mejor sentido semánticamente. Y también para que cuando computemos sumas de precios, por ejemplo, los valores de dicha suma los tengamos controlados.
+
+### Tests de controladores
+
+Tenemos los mismos *tests* de controladores para cada tipo de componente (modelo, tapicería, color y extras). Por tanto, escribo los *tests* una vez para una *componente* general.
+
+En todos estos *tests*, se están usando las *fixtures* para tener una serie de datos con los que jugar.
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Se debe obtener correctamente el índice del controlador de la componente|
+| Datos requeridos | URL de la componente, en la que se expone la API |
+| Condiciones a cumplir | Realizar un `GET` a esa dirección URL nos da una respuesta con código de éxito |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Se puede crear una nueva instancia de la componente |
+| Datos requeridos | URL del recurso para crear nuevas instancias de la componente |
+| Condiciones a cumplir | Se debe recibir un código de éxito como respuesta al `GET` |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Crear una nueva componente |
+| Datos requeridos | Los datos de la nueva componente a crear (ie. el nombre, el precio, ...)|
+| Condiciones a cumplir | Tras hacer el `POST` con los datos de la nueva componente, se debe recibir un código de éxito, y debemos ser redirigidos a la página principal de la componente |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Se debe poder acceder a una componente en concreto |
+| Datos requeridos | Identificación de la componente que queremos mostrar (URL del recurso) |
+| Condiciones a cumplir | Tras hacer el `GET` a esa componente, se recibe un código de éxito |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Se puede acceder a la página de edición de la componente |
+| Datos requeridos | Identificación de la componente en concreto que queremos editar |
+| Condiciones a cumplir | Tras hacer el `GET`, se debe obtener un código de éxito |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Se debe poder modificar los datos de una componente |
+| Datos requeridos | Identificador del recurso, nuevos datos para esa componente |
+| Condiciones a cumplir | Tras hacer el `POST` con los nuevos datos, se debe obtener un código de éxito y debemos ser redirigidos a la página principal de esa componente |
+
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Se debe poder borrar una instancia de una componente |
+| Datos requeridos | Identificador de la componente que queremos borrar |
+| Condiciones a cumplir | El número de componentes de ese tipo debe disminuir en uno. Debemos ser redirigidos a la página principal de esa componente |
+
+### Tests de modelos
+
+En este caso, no hemos tenido todo el autogeneración que sí tuvimos con los *tests* de controladores. De nuevo, como los cuatro tipos de componentes exhiben el mismo comportamiento, los *tests* de modelos han sido los mismos para los cuatro tipos. Por tanto, hablo de *componentes* en general para referirme al modelo, color, tapicería y extras.
+
+
+| | |
+| --- | --- |
+| Descripción de la prueba | El componente se debe guardar con éxito |
+| Datos requeridos | Datos de una nueva componente que vamos a guardar |
+| Condiciones a cumplir | La operación de guardado debe funcionar correctamente |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | No se puede guardar una componente sin nombre |
+| Datos requeridos | Una componente que hemos creado en memoria, sin nombre |
+| Condiciones a cumplir | El sistema nos muestra (a través de una variable `<componente>.save`) que no se pudo hacer el guardado de la variable |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | No se pueden guardar dos componentes con el mismo nombre |
+| Datos requeridos | Dos componentes creadas en memoria con el mismo nombre |
+| Condiciones a cumplir | El primer salvado se realiza con éxito, el segundo salvado no se puede realizar |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | El borrado de una instancia de una componente se realiza con éxito |
+| Datos requeridos | Datos de una nueva componente, que guardamos para después borrar |
+| Condiciones a cumplir | Se realiza el borrado de la componente con éxito |
+
+### Tests de integración
+
+De nuevo, tenemos el mismo comportamiento en los cuatro componentes. Así que los *tests* de integración serán los mismos, pero modificando los datos y tipos que se necesitan en cada caso. Y de nuevo, hablo de *componentes* en general para no repetir 4 veces las mismas tablas.
+
+
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Se pueden tomar las instancias de la componente |
+| Datos requeridos | Identificador del recurso para esa componente (*url* de modelos, tapicerías, color o extras )|
+| Condiciones a cumplir | Se navega a esa *url* con un `GET`, se consigue un código de éxito |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Podemos crear una nueva instancia de una componente |
+| Datos requeridos | Los datos con los que vamos a crear la nueva instancia de componente |
+| Condiciones a cumplir | Hacemos `POSTS` de los datos con los que vamos a crear la nueva instancia de la componente. Obtenemos una respuesta `redirect` y `success`. Además, dicha respuesta nos muestra los datos que hemos introducido. |
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Podemos crear una nueva instancia de componente, y acto seguido borrarla |
+| Datos requeridos | Datos de la nueva instancia que vamos a crear |
+| Condiciones a cumplir | Creamos la nueva instancia y recibimos la misma respuesta que en el caso de prueba anterior. Borramos la instancia que se ha creado en último lugar (que debe ser la que hemos creado). Recibimos un código de éxito y de `redirect` a la página principal donde se listan todas las instancias de las componentes |
+
+### Tests de sistemas
+
+De nuevo, uso la palabra *componentes* para referirme a modelo, tapicería, color y extras, para evitar ser repetitivo. Estos tests han sido generados automáticamente al haber usado *Model Driven Design*.
+
+| | |
+| --- | --- |
+| Descripción de la prueba | Se puede navegar a la vista principal donde se listan todas las instancias de la componente |
+| Datos requeridos | URL que tenemos que visitar |
+| Condiciones a cumplir | Se visita la URL dada, se observa que estamos en la página correspondiente mirando el título (`<h1>`) de esta|
+
+| --- | --- |
+| Descripción de la prueba | Podemos crear una nueva instancia|
+| Datos requeridos | Datos con los que rellenamos el formulario |
+| Condiciones a cumplir | Rellenamos los campos de los formularios con los datos adecuados. Clickamos en crear. Se muestra el mensaje de éxito |
+
+| --- | --- |
+| Descripción de la prueba | Podemos editar una instancia de componente |
+| Datos requeridos | Datos con los que vamos a editar |
+| Condiciones a cumplir | Se clicka en el botón de editar. Se rellenan los campos del formulario con los nuevos datos. Guardamos y comprobamos que recibimos un mensaje de éxito |
+
+| --- | --- |
+| Descripción de la prueba | Podemos borrar una instancia de componente |
+| Datos requeridos | URL de la instancia que queremos borrar |
+| Condiciones a cumplir | Visitamos la URL del color que queremos borrar. Clickamos en destruir, y comprobamos el mensaje de borrado con éxito |
