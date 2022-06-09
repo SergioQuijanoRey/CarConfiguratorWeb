@@ -136,11 +136,12 @@ Todo esto tendrá un impacto directo en los requisitos funcionales y no funciona
 ### Diagramas de vistas
 
 Como hacíamos en la práctica anterior, mostramos los diagramas de las vistas de la aplicación, para que sea más fácil comprender el funcionamiento de esta:
-![Vista principal de la aplicación. Desde esta vista navegamos al resto de partes de la aplicación](images/flutter/main_view.drawio.png)
 
-![Vista de selección de configuración](images/flutter/conf_view.drawio.png)
+![Vista principal de la aplicación. Desde esta vista navegamos al resto de partes de la aplicación](images/flutter/main_view.drawio.png){width=100%}
 
-![Vista de selección de una componente](images/flutter/conf_componente_view.drawio.png)
+![Vista de selección de configuración](images/flutter/conf_view.drawio.png){width=100%}
+
+![Vista de selección de una componente](images/flutter/conf_componente_view.drawio.png){width=100%}
 
 \newpage
 
